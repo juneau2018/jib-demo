@@ -45,6 +45,7 @@
           </to>
           <container>
             <useCurrentTimestamp>true</useCurrentTimestamp>
+            <appRoot>/app</appRoot>
             <environment>
               <JAVA_OPTS>-Xms512m -Xdebug</JAVA_OPTS>
             </environment>
