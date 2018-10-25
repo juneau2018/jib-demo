@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
@@ -15,4 +16,62 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <version>0.9.11</version>
+        <configuration>
+          <allowInsecureRegistries>true</allowInsecureRegistries>
+          <extraDirectory>${project.basedir}/src/main/jib</extraDirectory>
+          <from>
+            <image>registry.cosmoplat.com/library/openjdk:8-alpine</image>
+            <auth>
+              <username>${env.REGISTRY_USERNAME}</username>
+              <password>${env.REGISTRY_PASSWORD}</password>
+            </auth>
+          </from>
+          <to>
+            <image>registry.cosmoplat.com/common/jib-demo</image>
+            <auth>
+              <username>${env.REGISTRY_USERNAME}</username>
+              <password>${env.REGISTRY_PASSWORD}</password>
+            </auth>
+            <tags>
+              <tag>built-with-jib</tag>
+              <tag>latest</tag>
+            </tags>
+          </to>
+          <container>
+            <useCurrentTimestamp>true</useCurrentTimestamp>
+            <environment>
+              <JAVA_OPTS>-Xms512m -Xdebug</JAVA_OPTS>
+            </environment>
+            <entrypoint>
+              <arg>/bin/sh</arg>
+              <arg>-c</arg>
+              <arg>java ${JAVA_OPTS} -cp /app/resources/:/app/classes/:/app/libs/* com.mycompany.app.App</arg>
+            </entrypoint>
+            <ports>
+              <port>8080</port>
+              <port>2000-2003/tcp</port>
+            </ports>
+            <labels>
+              <key1>value1</key1>
+              <key2>value2</key2>
+            </labels>
+          </container>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
