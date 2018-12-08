@@ -26,14 +26,14 @@
           <allowInsecureRegistries>true</allowInsecureRegistries>
           <extraDirectory>${project.basedir}/src/main/jib</extraDirectory>
           <from>
-            <image>registry.cosmoplat.com/library/openjdk:8-alpine</image>
+            <image>registry.example.com/library/openjdk:8-alpine</image>
             <auth>
               <username>${env.REGISTRY_USERNAME}</username>
               <password>${env.REGISTRY_PASSWORD}</password>
             </auth>
           </from>
           <to>
-            <image>registry.cosmoplat.com/common/jib-demo</image>
+            <image>registry.example.com/common/jib-demo</image>
             <auth>
               <username>${env.REGISTRY_USERNAME}</username>
               <password>${env.REGISTRY_PASSWORD}</password>
