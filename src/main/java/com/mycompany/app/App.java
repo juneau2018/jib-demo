@@ -8,14 +8,14 @@ public class App
 {
     public static void main( String[] args ) throws InterruptedException
     {
-	while(true)
-	{
+        while(true)
+        {
             System.out.println( "Hello World!" );
             System.out.println( "++++++++++" );
             Thread.sleep(1);
             System.out.println( "Hello World!" );
             System.out.println( "----------" );
             Thread.sleep(1);
-	}
+        }
     }
 }
