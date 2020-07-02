@@ -52,7 +52,10 @@
             </tags>
           </to>
           <container>
+            <!--
             <useCurrentTimestamp>true</useCurrentTimestamp>
+            -->
+            <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
             <appRoot>/app</appRoot>
             <environment>
               <JAVA_OPTS>-Xms512m -Xdebug</JAVA_OPTS>
